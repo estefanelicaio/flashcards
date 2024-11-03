@@ -4,17 +4,17 @@
 			<p class="card-text">{{ currentFlashcard().front }}</p>
 			<button (click)="updateShowBack()" class="btn btn-primary">Exibir Verso</button>
 		</div>
-		@if (showBack()) {
-		<div class="card">
-			<div class="card-body">
-				<p class="card-text">{{ currentFlashcard().back }}</p>
+	</div>
+	@if (showBack()) {
+	<div class="card mt-2">
+		<div class="card-body">
+			<p class="card-text">{{ currentFlashcard().back }}</p>
+			<div class="mt-5">
+				<button (click)="goToNextFlashcard()" class="btn btn-success">Avançar</button>
 			</div>
 		</div>
-		}
 	</div>
-	<div class="mt-5">
-		<button (click)="goToNextFlashcard()" class="btn btn-success">Avançar</button>
-	</div>
+	}
 } @else {
 	<p>Você respondeu todos os flashcards!</p>
 	<div class="mt-5">
