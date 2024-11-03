@@ -4,7 +4,7 @@
 			<li class="list-group-item">
 				<div class="d-flex justify-content-between align-items-center">
 					<span>
-						<a href="#">{{ category.name }}</a>
+						<a [routerLink]="['/category', category.id, 'answer']" >{{ category.name }}</a>
 					</span>
 					<div>
 						<button type="button" class="btn btn-sm btn-warning me-2">
