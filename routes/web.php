@@ -3,6 +3,7 @@
 require __DIR__.'/auth.php';
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FlashcardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,4 +23,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
     Route::get('/category/create', [CategoryController::class, 'create'])->name('category.create');
     Route::post('/category', [CategoryController::class, 'store'])->name('category.store');
+
+    Route::get('/flashcard/create', [FlashcardController::class, 'create'])->name('flashcard.create');
+    Route::post('/flashcard', [FlashcardController::class, 'store'])->name('flashcard.store');
 });

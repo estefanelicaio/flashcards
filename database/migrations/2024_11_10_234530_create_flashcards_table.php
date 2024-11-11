@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string("front");
             $table->string("back");
             $table->foreignIdFor(Category::class);
+            $table->dateTime("answered_at")->nullable();
+            $table->boolean("answered_correctly")->nullable();
             $table->timestamps();
         });
     }
