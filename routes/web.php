@@ -23,6 +23,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
     Route::get('/category/create', [CategoryController::class, 'create'])->name('category.create');
     Route::post('/category', [CategoryController::class, 'store'])->name('category.store');
+    Route::get('/category/{id}/answer', [CategoryController::class, 'answer'])->name('category.answer');
 
     Route::get('/flashcard/create', [FlashcardController::class, 'create'])->name('flashcard.create');
     Route::post('/flashcard', [FlashcardController::class, 'store'])->name('flashcard.store');

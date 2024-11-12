@@ -8,7 +8,9 @@
                 <li class="list-group-item">{{ __('Nenhum flashcard encontrado!') }}</li>
             @else
                 @foreach ($categories as $category)
-                    <li class="list-group-item">{{ $category->name }}</li>
+                    <li class="list-group-item">
+                        <a href="{{ route('category.answer', $category->id) }}">{{ $category->name }}</a>
+                    </li>
                 @endforeach
             @endempty
         </ul>

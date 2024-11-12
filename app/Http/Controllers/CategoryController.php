@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Flashcard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -57,5 +58,13 @@ class CategoryController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function answer(string $id) {
+        // Trazer os que não foram resolvidos nas últimas 24 horas
+        // Arrumar a tela, incluir botão de mostrar verso e responder o cartão. Estudar como usar a paginação para mostrar de um em um.
+        $flashcards = Flashcard::where('category_id', $id);
+
+        return view('category.answer', ['flashcards' => $flashcards->paginate(1)]);
     }
 }
