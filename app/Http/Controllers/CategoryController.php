@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Flashcard;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -60,11 +61,30 @@ class CategoryController extends Controller
         //
     }
 
-    public function answer(string $id) {
-        // Trazer os que não foram resolvidos nas últimas 24 horas
-        // Arrumar a tela, incluir botão de mostrar verso e responder o cartão. Estudar como usar a paginação para mostrar de um em um.
-        $flashcards = Flashcard::where('category_id', $id);
+    public function answer(string $id)
+    {
+        $flashcards = Flashcard::where('category_id', $id)->where(function ($query) {
+            $query->where('answered_at', '<', Carbon::now()->subDays(1))
+                ->orWhereNull('answered_at');
+        });
 
-        return view('category.answer', ['flashcards' => $flashcards->paginate(1)]);
+        return view('category.answer', ['flashcards' => $flashcards->paginate(1), 'categoryId' => $id]);
+    }
+
+    public function finish(Category $category)
+    {
+        $flashcards = Flashcard::where('category_id', $category->id)
+            ->where(function ($query) {
+                $query->where('answered_at', '<', Carbon::now()->subDays(1))
+                    ->orWhereNull('answered_at');
+            })
+            ->get();
+
+        foreach ($flashcards as $flashcard) {
+            $flashcard->answered_at = now();
+            $flashcard->save();
+        }
+
+        return redirect()->route('category.index');
     }
 }
