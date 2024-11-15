@@ -55,6 +55,7 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
+        $category->flashcards()->delete();
         $category->delete();
 
         return back();
