@@ -12,7 +12,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Auth::user()->categories;
+        $categories = Category::where('user_id', Auth::user()->id)->orderBy('name')->paginate(10);
 
         return view('category.index', ['categories' => $categories]);
     }

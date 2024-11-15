@@ -26,5 +26,9 @@
                 @endforeach
             @endempty
         </ul>
+        <div class="mt-3">
+            {{ $categories->links() }}
+        </div>
     </div>
+
 </x-app-layout>
