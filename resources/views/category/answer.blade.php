@@ -2,6 +2,7 @@
     <div class="container py-10">
         @if ($flashcards->count() == 0)
             <p>{{ __('Você respondeu todos os flashcards dessa categoria!') }}</p>
+            <a href="{{ route('category.clear.answers', $categoryId) }}" class="btn btn-primary">Responder novamente</a>
         @else
             @foreach ($flashcards as $flashcard)
                 <div class="card">

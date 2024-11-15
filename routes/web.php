@@ -25,6 +25,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/category', [CategoryController::class, 'store'])->name('category.store');
     Route::delete('/category/{category}', [CategoryController::class, 'destroy'])->name('category.destroy');
     Route::get('/category/{id}/answer', [CategoryController::class, 'answer'])->name('category.answer');
+    Route::get('/category/{category}/answer/clear', [CategoryController::class, 'clearAnswers'])->name('category.clear.answers');
     Route::get('/category/{category}/finish', [CategoryController::class, 'finish'])->name('category.finish');
 
     Route::get('/flashcard/create', [FlashcardController::class, 'create'])->name('flashcard.create');

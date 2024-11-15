@@ -71,6 +71,13 @@ class CategoryController extends Controller
         return view('category.answer', ['flashcards' => $flashcards->paginate(1), 'categoryId' => $id]);
     }
 
+    public function clearAnswers(Category $category)
+    {
+        $category->flashcards()->update(['answered_at' => null]);
+
+        return redirect()->route('category.answer', $category->id);
+    }
+
     public function finish(Category $category)
     {
         $flashcards = Flashcard::where('category_id', $category->id)
