@@ -9,8 +9,20 @@
             @else
                 @foreach ($categories as $category)
                     <li class="list-group-item">
-                        <a href="{{ route('category.answer', $category->id) }}">{{ $category->name }}</a>
+                        <div class="flex justify-content-between align-items-center">
+                            <a href="{{ route('category.answer', $category->id) }}">{{ $category->name }}</a>
+                            <button class="btn btn-danger btn-sm"
+                                onclick="event.preventDefault(); document.getElementById('delete-category-{{ $category->id }}').submit();">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </div>
                     </li>
+
+                    <form id="delete-category-{{ $category->id }}" action="{{ route('category.destroy', $category) }}"
+                        method="POST" style="display: none;">
+                        @csrf
+                        @method('DELETE')
+                    </form>
                 @endforeach
             @endempty
         </ul>
